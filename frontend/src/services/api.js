@@ -1,8 +1,9 @@
 import axios from "axios";
 
-// In production this comes from an env var (import.meta.env.VITE_API_URL),
-// hardcoded here for local dev simplicity.
-const API_BASE = "http://localhost:8000";
+// Vite exposes env vars prefixed with VITE_ via import.meta.env.
+// Locally (no .env file), this falls back to localhost.
+// In the production build, .env.production sets this to the real API Gateway URL.
+const API_BASE = import.meta.env.VITE_API_URL || "http://localhost:8000";
 
 const api = axios.create({
   baseURL: API_BASE,
